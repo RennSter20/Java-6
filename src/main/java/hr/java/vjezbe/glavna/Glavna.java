@@ -89,9 +89,6 @@ public class Glavna {
         List<Integer> tempECTS = new ArrayList<>();
         List<Integer> tempOdabirProfesora = new ArrayList();
 
-        //1
-        List<Semestar> tempSemestar = new ArrayList<>();
-
         boolean nastaviPetlju = false;
 
         for(int i = 0; i< brojPredmeta; i++){
@@ -149,41 +146,6 @@ public class Glavna {
                     unos.nextLine();
                 }
             }while(nastaviPetlju);
-
-            nastaviPetlju = true;
-            do{
-                try{
-                    System.out.println("Unesite semestar predmeta: 1 - ZIMSKI, 2 - LJETNI");
-                    Integer odabirPred;
-                    odabirPred = unos.nextInt();
-                    if(odabirPred != 1 && odabirPred != 2){
-                        System.out.println("Ponovite upis!");
-                        nastaviPetlju = true;
-                        unos.nextLine();
-                    }else{
-                        nastaviPetlju = false;
-                        unos.nextLine();
-                        switch (odabirPred){
-                            case 1:
-                                Semestar.zimski++;
-                                tempSemestar.add(Semestar.ZIMSKI);
-                                break;
-                            case 2:
-                                Semestar.ljetni++;
-                                tempSemestar.add(Semestar.LJETNI);
-                                break;
-                        }
-                    }
-                }catch (InputMismatchException ex){
-                    logger.info(String.valueOf(ex.getStackTrace()));
-                    nastaviPetlju = true;
-                    unos.nextLine();
-                }
-            }while(nastaviPetlju);
-
-            //
-            ispisPredmeta(tempSemestar.get(i));
-
         }
 
 
@@ -191,7 +153,7 @@ public class Glavna {
         List<Predmet> predmeti = new ArrayList<>();
 
         for(int i = 0; i< brojPredmeta; i++){
-            predmeti.add(i, new Predmet.PredmetBuilder().setSemestar(tempSemestar.get(i)).setSifra(tempSifra.get(i)).setNaziv(tempNaziv.get(i)).setBrojEctsBodova(tempECTS.get(i)).setNositelj(profesori.get(tempOdabirProfesora.get(i) - 1)).setStudenti(new HashSet<>()).createPredmet());
+            predmeti.add(i, new Predmet.PredmetBuilder().setSifra(tempSifra.get(i)).setNaziv(tempNaziv.get(i)).setBrojEctsBodova(tempECTS.get(i)).setNositelj(profesori.get(tempOdabirProfesora.get(i) - 1)).setStudenti(new HashSet<>()).createPredmet());
         }
 
         for(Profesor profesor : profesori){
@@ -210,37 +172,13 @@ public class Glavna {
 
         }
 
-        //2
-        System.out.println("Predmeti u zimskom semestru: \n");
-        predmeti.stream().forEach(predmet -> {
-            if(predmet.getSemestar().getRedniBrojSemestra().equals("1")){
-                System.out.println(predmet.toString());
-            }
-        });
-        System.out.println("");
-
-        System.out.println("Predmeti u ljetnom semestru: \n");
-        predmeti.stream().forEach(predmet -> {
-            if(predmet.getSemestar().getRedniBrojSemestra().equals("2")){
-                System.out.println(predmet.toString());
-            }
-        });
 
 
 
         return predmeti;
     }
 
-    //3
-    static <T extends Semestar> void ispisPredmeta(T semestar){
-            if(semestar.getRedniBrojSemestra() == "1"){
-                System.out.println("Trenutni broj predmeta u zimskom semestru: ");
-                System.out.println(Semestar.getZimski());
-            }else{
-                System.out.println("Trenutni broj predmeta u ljetnom semestru: ");
-                System.out.println(Semestar.getLjetni());
-            }
-    }
+
     /**
      * Metoda služi za unos podataka o ispitu.
      * @param unos Scanner objekt.
@@ -338,7 +276,7 @@ public class Glavna {
 
         System.out.print("Unesite datum i vrijeme ispita u formatu (dd.MM.yyyy.THH:mm): ");
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy.'T'HH:mm");
-        LocalDateTime tempDatum = LocalDate.parse(unos.nextLine(), dateFormat).atStartOfDay();
+        LocalDate tempDatum = LocalDate.from(LocalDate.parse(unos.nextLine(), dateFormat).atStartOfDay());
 
         predmeti.get(tempOdabirPredmet - 1).getStudenti().add(studenti.get(tempOdabirStudenta - 1));
 

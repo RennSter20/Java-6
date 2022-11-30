@@ -12,15 +12,13 @@ public class Predmet {
     private Integer brojEctsBodova;
     private Profesor nositelj;
     private Set<Student> studenti;
-    private Semestar semestar;
 
-    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, Set<Student> studenti, Semestar semestar) {
+    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, Set<Student> studenti) {
         this.sifra = sifra;
         this.naziv = naziv;
         this.brojEctsBodova = brojEctsBodova;
         this.nositelj = nositelj;
         this.studenti = studenti;
-        this.semestar = semestar;
     }
 
 
@@ -31,7 +29,6 @@ public class Predmet {
         private Integer brojEctsBodova;
         private Profesor nositelj;
         private Set<Student> studenti;
-        private Semestar semestar;
 
         public PredmetBuilder setSifra(String sifra) {
             this.sifra = sifra;
@@ -57,24 +54,11 @@ public class Predmet {
             this.studenti = studenti;
             return this;
         }
-
-        public PredmetBuilder setSemestar(Semestar semestar){
-            this.semestar = semestar;
-            return this;
-        }
-
         public Predmet createPredmet() {
-            return new Predmet(sifra, naziv, brojEctsBodova, nositelj, studenti, semestar);
+            return new Predmet(sifra, naziv, brojEctsBodova, nositelj, studenti);
         }
     }
 
-    public Semestar getSemestar() {
-        return semestar;
-    }
-
-    public void setSemestar(Semestar semestar) {
-        this.semestar = semestar;
-    }
     public String getSifra() {
         return sifra;
     }
@@ -113,7 +97,7 @@ public class Predmet {
                 "Sifra: " + sifra +
                 "\nNaziv: " + naziv +
                 "\nBroj ECTS bodova: " + brojEctsBodova +
-                "\nNositelj predmeta: " + nositelj.getIme() +
-                "\nSemestar: " + semestar.nazivSemestra + "\n";
+                "\nNositelj predmeta: " + nositelj.getIme();
+
     }
 }
