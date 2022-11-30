@@ -1,6 +1,7 @@
 package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.entitet.*;
+import hr.java.vjezbe.iznimke.PostojiViseNajmadjihStudenataException;
 import hr.java.vjezbe.sortiranje.StudentSorter;
 import hr.java.vjezbe.sortiranje.SveucilisteSorter;
 
@@ -324,7 +325,15 @@ public class GlavnaDatoteka  {
         System.out.println("Najbolji student 2022. godine je " + najuspjesniji.getIme() + " " + najuspjesniji.getPrezime() + " JMBAG: " + najuspjesniji.getJmbag());
 
     }
-
+    static void ispisZaRektora(ObrazovnaUstanova ustanova){
+        if(ustanova instanceof FakultetRacunarstva){
+            try{
+                System.out.println("Student koji je osvojio rektorovu nagradu je: " + ((FakultetRacunarstva) ustanova).odrediStudentaZaRektorovuNagradu().getIme() + " " + ((FakultetRacunarstva) ustanova).odrediStudentaZaRektorovuNagradu().getPrezime());
+            }catch (PostojiViseNajmadjihStudenataException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
     public static void ispisStudenataPoKolegijima(List<Predmet> predmeti){
 
 
@@ -343,6 +352,12 @@ public class GlavnaDatoteka  {
     }
     public static void main(String[] args) {
 
+        System.out.println("Ucitavanje profesora...");
+        System.out.println("Ucitavanje studenata...");
+        System.out.println("Ucitavanje predmeta...");
+        System.out.println("Ucitavanje ispita i ocjena...");
+        System.out.println("Ucitavanje obrazovnih ustanova...");
+
         Map<Profesor, List<Predmet>> mapa = new HashMap<>();
 
         List<ObrazovnaUstanova> sveUstanove = dohvatiObrazovneUstanove(USTANOVE_SERIALIZATION_FILE_NAME);
@@ -350,15 +365,28 @@ public class GlavnaDatoteka  {
             ispisProfesoraKojiPredaju(sveUstanove.get(i).getPredmeti(), sveUstanove.get(i).getStudenti(), sveUstanove.get(i).getProfesori(), mapa);
             ispisStudenataPoKolegijima(sveUstanove.get(i).getPredmeti());
             ispisIzvrsnihStudenata(sveUstanove.get(i).getIspiti());
-            Student najuspjesniji = sveUstanove.get(i).odrediNajuspjesnijegStudentaNaGodini(2022);
-            System.out.println("Najuspjesniji student godine je " + najuspjesniji.getIme() + " " + najuspjesniji.getPrezime());
 
             ispisKonacnihOcjena(sveUstanove.get(i));
             ispisNajboljegStudenta(sveUstanove.get(i));
+            ispisZaRektora(sveUstanove.get(i));
 
             for(int j = 0;j<3;j++){
                 System.out.println("");
             }
+        }
+
+        List<ObrazovnaUstanova> sortirani = sveUstanove.stream().sorted(((o1, o2) -> {
+            if(o1.getStudenti().size() > o2.getStudenti().size()){
+                return 1;
+            }else if(o1.getStudenti().size() < o2.getStudenti().size()){
+                return 0;
+            }else{
+                return o1.getNaziv().compareTo(o2.getNaziv());
+            }
+        })).toList();
+        System.out.println("Sortirane obrazovne ustanove prema broju studenata:");
+        for(int i = 0;i<sortirani.size();i++){
+            System.out.println(sortirani.get(i).getNaziv() + " " + sortirani.get(i).getStudenti().size() + " studenata");
         }
 
     }

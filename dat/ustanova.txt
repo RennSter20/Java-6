@@ -1,13 +1,13 @@
 100
 1
-TVZ
+Tehnicko veleuciliste Zagreb
 0001 0002
 1111 1112 1113
 2221 2222
 3331 3332
 200
 2
-FER
+Fakultet elektrotehnike i racunarstva
 0003 0004
 1114 1115 1116
 2223 2224

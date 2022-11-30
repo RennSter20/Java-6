@@ -79,7 +79,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova   implements Diplomsk
 
         int lastIndex = 0;
         for(int i = brojIzvrsnihOcjena.size()-1;i>-1;i--){
-            if(brojIzvrsnihOcjena.get(i) == o.ocjena){
+            if(brojIzvrsnihOcjena.get(i) >= brojIzvrsnihOcjena.get(lastIndex)){
                 lastIndex = i;
             }
         }
