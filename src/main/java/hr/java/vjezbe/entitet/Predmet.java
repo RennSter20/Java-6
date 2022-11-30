@@ -6,14 +6,15 @@ import java.util.Set;
  * Klasa predmet sadrži sve informacije o predmetu, od šifre, naziva, nositelja te svih studenata koji su upisani na taj predmet. Ti studenti se određuju tako da se pridodaju predmetu jedino ako
  * su pisali jedan ispit iz tog predmeta.
  */
-public class Predmet {
+public class Predmet extends Entitet {
 
     private String sifra, naziv;
     private Integer brojEctsBodova;
     private Profesor nositelj;
     private Set<Student> studenti;
 
-    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, Set<Student> studenti) {
+    public Predmet(Long id, String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, Set<Student> studenti) {
+        super(id);
         this.sifra = sifra;
         this.naziv = naziv;
         this.brojEctsBodova = brojEctsBodova;
@@ -29,6 +30,12 @@ public class Predmet {
         private Integer brojEctsBodova;
         private Profesor nositelj;
         private Set<Student> studenti;
+        private Long id;
+
+        public PredmetBuilder setID(Long id){
+            this.id = id;
+            return this;
+        }
 
         public PredmetBuilder setSifra(String sifra) {
             this.sifra = sifra;
@@ -55,7 +62,7 @@ public class Predmet {
             return this;
         }
         public Predmet createPredmet() {
-            return new Predmet(sifra, naziv, brojEctsBodova, nositelj, studenti);
+            return new Predmet(id, sifra, naziv, brojEctsBodova, nositelj, studenti);
         }
     }
 

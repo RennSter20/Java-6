@@ -7,8 +7,8 @@ public class Profesor extends Osoba {
 
     private String sifra, ime, prezime, titula;
 
-    public Profesor(String sifra, String ime, String prezime, String titula) {
-        super(ime, prezime);
+    public Profesor(Long id, String sifra, String ime, String prezime, String titula) {
+        super(id, ime, prezime);
         this.sifra = sifra;
         this.ime = ime;
         this.prezime = prezime;
@@ -18,17 +18,13 @@ public class Profesor extends Osoba {
     public static class Builder {
 
         private String sifra, ime, prezime, titula;
-
-        public Profesor build(){
-            Profesor prof = new Profesor();
-            prof.sifra = this.sifra;
-            prof.ime = this.ime;
-            prof.prezime = this.prezime;
-            prof.titula = this.titula;
-
-            return prof;
+        private Long id;
+        public Profesor build() {
+            return new Profesor(id, sifra, ime, prezime, titula);
         }
-
+        public void ProfesorBuilder(long id) {
+            this.id = id;
+        }
 
         public Builder withSifra(String sifra){
             this.sifra = sifra;
@@ -51,7 +47,6 @@ public class Profesor extends Osoba {
         }
     }
 
-    private Profesor(){}
 
     public String getSifra() {
         return sifra;

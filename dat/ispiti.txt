@@ -1,14 +1,32 @@
-1
+3331
+1111
 Dvorana FSB
 FSB 1
 IntelliJ
-1
+2221
 4
 05.11.2022.T18:00
-1
+3332
+1111
 Dvorana FER
 FER 2
 IntelliJ
-2
+2222
 5
 06.11.2022.T18:30
+3333
+1114
+Dvorana Neka
+Neka Jedan
+IntelliJ
+2223
+4
+12.10.2022.T19:00
+3334
+1114
+Dvorana Ona
+Ona Dva
+IntelliJ
+2224
+5
+13.10.2022.T19:00

@@ -1,8 +1,20 @@
+0001
 P5567
 Janko
 Petrovic
 visi predavac
+0002
 P9878
 Ivica
 Zupan
 profesor visoke skole
+0003
+P987
+Darko
+Milic
+predavac
+0004
+P312
+Danica
+Despot
+predavac

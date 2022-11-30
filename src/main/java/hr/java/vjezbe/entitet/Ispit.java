@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Klasa koja sadrži podatke o ispitu, studenta koji je pisao ispit, predmet ispita, ocjenu, datum i dvoranu u kojoj se ispit pisao.
  * Također sadrži implementiranu metodu unosSoftwarea u kojoj se unosi software koji se koristio na ispitu.
  */
-public final class Ispit implements Online {
+public final class Ispit extends Entitet implements Online  {
 
     private Predmet predmet;
     private Student student;
@@ -17,15 +17,14 @@ public final class Ispit implements Online {
 
     private Dvorana dvorana;
 
-    public Ispit(Predmet predmet, Student student, Integer ocjena, LocalDate datumIVrijeme, Dvorana dvorana) {
+    public Ispit(Long id, Predmet predmet, Student student, Integer ocjena, LocalDate datumIVrijeme, Dvorana dvorana) {
+        super(id);
         this.predmet = predmet;
         this.student = student;
         this.ocjena = ocjena;
         this.datumIVrijeme = datumIVrijeme;
         this.dvorana = dvorana;
     }
-
-    public Ispit(){}
 
     @Override
     public void unosSoftwarea(Scanner unos) {

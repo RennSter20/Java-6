@@ -1,0 +1,4 @@
+Profesori - 000
+Predmeti - 111
+Studenti - 222
+Ispiti - 333

@@ -1,6 +1,5 @@
 package hr.java.vjezbe.entitet;
 
-import hr.java.vjezbe.glavna.Glavna;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import hr.java.vjezbe.iznimke.PostojiViseNajmadjihStudenataException;
 import org.slf4j.Logger;
@@ -17,12 +16,12 @@ import java.util.List;
  * za rektorovu nagradu.
  */
 
-public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski {
+public class FakultetRacunarstva extends ObrazovnaUstanova   implements Diplomski {
 
-    public static final Logger logger = LoggerFactory.getLogger(Glavna.class);
+    //public static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 
-    public FakultetRacunarstva(String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
-        super(naziv, predmeti, profesori, studenti, ispiti);
+    public FakultetRacunarstva(Long id, String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
+        super(id, naziv, predmeti, profesori, studenti, ispiti);
     }
 
     /**
@@ -48,7 +47,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
         }catch(NemoguceOdreditiProsjekStudentaException e){
             System.out.println(e.getMessage());
-            logger.error(String.valueOf(e.getCause()));
+            //logger.error(String.valueOf(e.getCause()));
             return null;
         }
 

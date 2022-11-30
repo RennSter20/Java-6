@@ -1,6 +1,5 @@
 package hr.java.vjezbe.entitet;
 
-import hr.java.vjezbe.glavna.Glavna;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +14,10 @@ import java.util.List;
  */
 public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska{
 
-    public static final Logger logger = LoggerFactory.getLogger(Glavna.class);
+    //public static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 
-    public VeleucilisteJave(String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
-        super(naziv, predmeti, profesori, studenti, ispiti);
+    public VeleucilisteJave(Long id, String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
+        super(id, naziv, predmeti, profesori, studenti, ispiti);
     }
 
 
@@ -42,7 +41,7 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
 
             }catch (NemoguceOdreditiProsjekStudentaException e){
                 System.out.println(e.getMessage());
-                logger.error(String.valueOf(e.getCause()));
+                //logger.error(String.valueOf(e.getCause()));
                 return null;
             }
 

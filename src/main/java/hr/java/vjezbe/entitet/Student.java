@@ -16,8 +16,8 @@ public class Student extends Osoba {
     private String ime, prezime, jmbag;
     private LocalDate datumRodjenja;
 
-    public Student(String ime, String prezime, String jmbag, LocalDate datumRodjenja) {
-        super(ime, prezime);
+    public Student(Long id, String ime, String prezime, String jmbag, LocalDate datumRodjenja) {
+        super(id, ime, prezime);
         this.ime = ime;
         this.prezime = prezime;
         this.jmbag = jmbag;
