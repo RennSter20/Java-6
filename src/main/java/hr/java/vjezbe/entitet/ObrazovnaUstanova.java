@@ -1,11 +1,12 @@
 package hr.java.vjezbe.entitet;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Abstraktna klasa koja sadrži naziv ustanove, sve predmete, profesore, studente i ispite koji su se pisali.
  */
-public abstract class ObrazovnaUstanova {
+public abstract class ObrazovnaUstanova extends Entitet {
 
     private String naziv;
     private List<Predmet> predmeti;
@@ -16,9 +17,9 @@ public abstract class ObrazovnaUstanova {
 
     public abstract Student odrediNajuspjesnijegStudentaNaGodini(Integer godina);
 
-    public ObrazovnaUstanova(){}
 
     public ObrazovnaUstanova(Long id, String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
+        super(id);
         this.id = id;
         this.naziv = naziv;
         this.predmeti = predmeti;

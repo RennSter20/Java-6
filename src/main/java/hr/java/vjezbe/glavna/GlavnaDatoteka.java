@@ -20,6 +20,7 @@ public class GlavnaDatoteka  {
     private static final String ISPITI_SERIALIZATION_FILE_NAME = "dat\\ispiti.txt";
     private static final String OCJENE_SERIALIZATION_FILE_NAME = "dat\\ocjene.txt";
     private static final String USTANOVE_SERIALIZATION_FILE_NAME = "dat\\ustanova.txt";
+    private static final String SERIALIZED_OUTPUT_FILE = "dat\\obrazovne-ustanove.dat";
 
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
     private static final DateTimeFormatter ISPIT_TIME_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy.'T'HH:mm");
@@ -350,6 +351,21 @@ public class GlavnaDatoteka  {
         );
 
     }
+
+    static void serializeToFile(String filename, Map<Long, ObrazovnaUstanova> obrazovneUstanove) {
+        try (var out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            try {
+                out.writeObject(obrazovneUstanove);
+            } catch (NotSerializableException e) {
+                System.out.println(e.getMessage());
+                throw new RuntimeException(e.getMessage(), e);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(String.format("File not found: %s%n", filename));
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
     public static void main(String[] args) {
 
         System.out.println("Ucitavanje profesora...");
@@ -389,6 +405,13 @@ public class GlavnaDatoteka  {
             System.out.println(sortirani.get(i).getNaziv() + " " + sortirani.get(i).getStudenti().size() + " studenata");
         }
 
+        Map<Long, ObrazovnaUstanova> mapaHash = new HashMap<>();
+        Long l = 100L;
+        for(int i = 0;i<sveUstanove.size();i++){
+            mapaHash.put(l, sveUstanove.get(i));
+            l++;
+        }
+        serializeToFile(SERIALIZED_OUTPUT_FILE, mapaHash);
     }
 
 }
